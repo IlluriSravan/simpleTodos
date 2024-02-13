@@ -1,0 +1,23 @@
+/* Write your CSS here */
+/* Write your CSS here */
+.individualItem {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+.button {
+  background-color: white;
+  border-color: red;
+  border-radius: 6px;
+  height: 24px;
+}
+.para {
+  width: 35vw;
+}
