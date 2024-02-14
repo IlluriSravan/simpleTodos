@@ -1,5 +1,6 @@
 import './index.css'
 import {Component} from 'react'
+import {v4 as uuidv4} from 'uuid'
 import TodoItem from '../TodoItem'
 
 const initialTodosList = [
@@ -38,27 +39,66 @@ const initialTodosList = [
 ]
 
 class SimpleTodos extends Component {
-  state = {todosList: initialTodosList}
+  state = {todoList: initialTodosList}
 
   deleteFunction = id => {
-    const {todosList} = this.state
-    const filteredTodoList = todosList.filter(each => each.id !== id)
+    const {todoList} = this.state
+    const filteredTodoList = todoList.filter(each => each.id !== id)
 
-    this.setState({todosList: filteredTodoList})
+    this.setState({todoList: filteredTodoList, input: ''})
   }
 
+  onAdd = () => {
+    const {input, todoList} = this.state
+
+    const arr = input.split(' ')
+    if (!Number.isNaN(parseInt(input.slice(-1)))) {
+      console.log('The last character is a number.')
+      const numbe = arr[arr.length - 1]
+      arr.pop()
+      let i = 1
+      while (i <= numbe) {
+        const todo = arr.join(' ')
+        todoList.unshift({id: uuidv4(), title: todo})
+        i += 1
+      }
+    } else {
+      console.log('The last character is not a number.')
+      const tod = arr.join(' ')
+      console.log(tod)
+      todoList.unshift({id: uuidv4(), title: tod})
+    }
+
+    this.setState({todoList, input: ''})
+  }
+
+  editFunction = id => {}
+
   render() {
-    const {todosList} = this.state
+    const {todoList, input} = this.state
+    console.log(todoList)
     return (
       <div className="container">
         <div className="todoContainer">
           <h1>Simple Todos</h1>
+          <div className="inpp">
+            <input
+              type="text"
+              className="inp"
+              onChange={e => this.setState({input: e.target.value})}
+              value={input}
+            />
+            <button type="button" className="button" onClick={this.onAdd}>
+              Add
+            </button>
+          </div>
           <ul className="unorderedList">
-            {todosList.map(each => (
+            {todoList.map(each => (
               <TodoItem
                 item={each}
                 key={each.id}
                 deleteFunction={this.deleteFunction}
+                editFunction={this.editFunction}
               />
             ))}
           </ul>
