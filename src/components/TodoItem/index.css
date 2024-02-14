@@ -12,12 +12,22 @@
   align-items: center;
   text-align: left;
 }
+.checked {
+  text-decoration: line-through;
+}
 .button {
   background-color: white;
   border-color: red;
   border-radius: 6px;
   height: 24px;
+  margin-right: 20px;
+  margin-bottom: 30px;
 }
 .para {
   width: 35vw;
+}
+.edit-input {
+  width: 35vw;
+  margin-bottom: 30px;
+  height: 40px;
 }
